@@ -2,6 +2,14 @@ import * as React from "react";
 import styles from "./HelloWorld.module.scss";
 import { IHelloWorldProps } from "./IHelloWorldProps";
 import { escape } from "@microsoft/sp-lodash-subset";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import ListGroup from "react-bootstrap/ListGroup"
+import Table from "react-bootstrap/Table"
 
 import {
   Environment,
@@ -71,38 +79,57 @@ export default class HelloWorld extends React.Component<IHelloWorldProps, IHello
 
   public render(): React.ReactElement<IHelloWorldProps> {
     return (
-      <div className={styles.helloWorld}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-            <div className={styles.column}>
-              <span className={styles.title}>
-                Welcome to SharePoint with reactjs!
-              </span>
-              <p className={styles.subTitle}>
-                Customize SharePoint experiences using Web Parts.
-              </p>
-              <p className={styles.description}>
-                {escape(this.props.description)}
-              </p>
-              <p className={styles.description}>
-                {escape(this.props.test2)}
-              </p>
-              <p className={styles.description}>
-                {escape(this.props.test)}
-              </p>
-              <p>{ this.props.context.pageContext.web.title }</p>
-              <div>{ this.state.data.map(value => {
+      <Container>
+      <Row>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>WebPart Description Property</th>
+              <th>Site Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{escape(this.props.description)}</td>
+              <td>{escape(this.props.context.pageContext.web.title)} </td>
+            </tr>
+          </tbody>
+        </Table>
+
+        <ListGroup>
+                { this.state.data.map(value => {
                 return (
-                  <div key={value.Id}>{ value.Title }</div>
+                  <ListGroup.Item key={value.Id} style={{ 'color': '#000' }}>{ value.Title }</ListGroup.Item>
                 )
-              })}</div>
-              <a href="https://aka.ms/spfx" className={styles.button}>
-                <span className={styles.label}>Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+              })}                
+              </ListGroup>
+              <Button variant="primary">Primary</Button>
+      </Row>
+
+            <h1>MyBootstrap React</h1>
+              <Row>
+                <Col>1 of 2</Col>
+                <Col>2 of 2</Col>
+              </Row>
+              <Row>
+                <Col>1 of 3</Col>
+                <Col>2 of 3</Col>
+                <Col>3 of 3</Col>
+              </Row>
+              <Row>
+                <ButtonToolbar>
+                  <Button variant="primary">Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="success">Success</Button>
+                  <Button variant="warning">Warning</Button>
+                  <Button variant="danger">Danger</Button>
+                  <Button variant="info">Info</Button>
+                  <Button variant="light">Light</Button>
+                  <Button variant="dark">Dark</Button>
+                  <Button variant="link">Link</Button>
+                </ButtonToolbar>
+              </Row>
+      </Container>
     );
   }
 }

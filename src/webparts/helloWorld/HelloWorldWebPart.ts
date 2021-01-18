@@ -10,6 +10,8 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
+import Chart from './components/chart';
+
 import * as strings from 'HelloWorldWebPartStrings';
 import HelloWorld from './components/HelloWorld';
 import { IHelloWorldProps } from './components/IHelloWorldProps';
@@ -26,7 +28,7 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
 
   public render() {
     const element: React.ReactElement<IHelloWorldProps> = React.createElement(
-      HelloWorld,
+      /* HelloWorld,
       {
         description: this.properties.description,
         test: this.properties.test,
@@ -34,7 +36,8 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
         test2: this.properties.test2,
         test3: this.properties.test3,
         context: this.context
-      },
+      }, */
+      Chart
     );
 
     ReactDom.render(element, this.domElement);
